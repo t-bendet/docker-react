@@ -12,3 +12,20 @@ script:
   - docker run -e CI=true talbendet/docker-react npm run test
   # CI=true - The test command will force Jest to run in CI-mode, and tests will only run once instead of launching the watcher.
   # -e sets an environment variable
+
+deploy:
+  # travis has some pre sets for deployment 
+  provider: elasticbeanstalk
+  region : "us-west-2"
+  # the name of the app on aws
+  app: "docker-react"
+  env: "Dockerreact-env"
+  # !what is a bucket?
+  bucket_name: "elasticbeanstalk-us-west-2-964311154337"
+  bucket_path: "docker-react"
+  # only build when pushed to master branch
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+
