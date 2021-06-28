@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-# -t(tag the container,-f force the build to use .dev instead of the default file)
+# -t (tag the container,-f force the build to use .dev instead of the default file)
   - docker build -t talbendet/docker-react -f Dockerfile.dev .  
 
 script:
