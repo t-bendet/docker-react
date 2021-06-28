@@ -1,0 +1,14 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+# -t(tag the container,-f force the build to use .dev instead of the default file)
+  - docker build -t talbendet/docker-react -f Dockerfile.dev .  
+
+script:
+  # travis is watching the output of each command,if it returns status code of Zero it assume the test/build failed
+  - docker run -e CI=true talbendet/docker-react npm run test
+  # CI=true - The test command will force Jest to run in CI-mode, and tests will only run once instead of launching the watcher.
+  # -e sets an environment variable
